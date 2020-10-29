@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
 [assembly: AssemblyTitle("Spooksoft.VisualStateManager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Commands and Conditions - a way to simplify command management in WPF applications")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Spooksoft")]
 [assembly: AssemblyProduct("Spooksoft.VisualStateManager")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

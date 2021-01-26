@@ -54,13 +54,13 @@ This is the simplest way you can use Commands and Conditions:
 
 ```csharp
 
-private readonly Condition documentSavedCondition;
+private readonly SimpleCondition documentSavedCondition;
 
 public ICommand SaveDocumentCommand { get; }
 
 public MyWindow()
 {
-    documentSavedCondition = new Condition(false);
+    documentSavedCondition = new SimpleCondition(false);
     SaveDocumentCommand = new AppCommand(obj => DoSaveDocument, !documentSavedCondition); // Note the !
 }
 
@@ -81,14 +81,14 @@ Note, that `SaveDocument` and `HandleDocumentChanged` methods no longer worry ab
 
 ## AppCommand
 
-The `AppCommand` class provides a simple implementation of `ICommand` interface and provides infrastructure required for listening to `Condition` value changes. You need to provide an `Action<object>`, which will be called when the command executes and - optionally - a `Condition`, which will control its enable-state.
+The `AppCommand` class provides a simple implementation of `ICommand` interface and provides infrastructure required for listening to `SimpleCondition` value changes. You need to provide an `Action<object>`, which will be called when the command executes and - optionally - a `SimpleCondition`, which will control its enable-state.
 
-## Condition
+## SimpleCondition
 
 The simplest condition wraps a `bool` into a class and notifies about changes. The usage is very simple.
 
 ```csharp
-myCondition = new Condition(false); // Initial value
+myCondition = new SimpleCondition(false); // Initial value
 myCommand = new AppCommand(obj => SomeMethod(), myCondition);
 
 // ...

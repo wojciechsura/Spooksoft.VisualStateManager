@@ -10,17 +10,17 @@ namespace Spooksoft.VisualStateManager.Conditions
             where T : struct
     {
         private T current;
-        private readonly Dictionary<T, Condition> conditions;
+        private readonly Dictionary<T, SimpleCondition> conditions;
 
         public SwitchCondition()
         {
-            conditions = new Dictionary<T, Condition>();
+            conditions = new Dictionary<T, SimpleCondition>();
             current = default;
         }
 
         public SwitchCondition(params T[] newValues)
         {
-            conditions = new Dictionary<T, Condition>();
+            conditions = new Dictionary<T, SimpleCondition>();
             current = default;
 
             foreach (var value in newValues)
@@ -32,7 +32,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             if (conditions.ContainsKey(value))
                 throw new ArgumentException("value");
 
-            var condition = new Condition(current.Equals(value));
+            var condition = new SimpleCondition(current.Equals(value));
             conditions.Add(value, condition);
 
             if (conditions.Count == 1)
@@ -68,7 +68,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             }
         }
 
-        public Condition this[T value]
+        public SimpleCondition this[T value]
         {
             get
             {

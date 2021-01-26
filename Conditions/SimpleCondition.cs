@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spooksoft.VisualStateManager.Conditions
 {
-    public class Condition : BaseCondition
+    public class SimpleCondition : BaseCondition
     {
         // Private fields ----------------------------------------------------
 
@@ -25,7 +25,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods ----------------------------------------------------
 
-        public Condition(bool newValue = false)
+        public SimpleCondition(bool newValue = false)
         {
             value = newValue;
         }

@@ -2,9 +2,9 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>Spooksoft.VisualStateManager</title>
-    <author>Wojciech "Spook" Sura</author>
+    <authors>Wojciech "Spook" Sura</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/wojciechsura/Spooksoft.VisualStateManager</projectUrl>

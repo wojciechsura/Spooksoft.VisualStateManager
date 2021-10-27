@@ -4,7 +4,7 @@
     <id>$id$</id>
     <version>1.0.2</version>
     <title>Spooksoft.VisualStateManager</title>
-    <authors>Wojciech "Spook" Sura</authors>
+    <author>Wojciech "Spook" Sura</author>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/wojciechsura/Spooksoft.VisualStateManager</projectUrl>

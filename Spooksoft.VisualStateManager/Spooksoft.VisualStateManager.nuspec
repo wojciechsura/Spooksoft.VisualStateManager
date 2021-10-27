@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>Spooksoft.VisualStateManager</title>
     <authors>Wojciech "Spook" Sura</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

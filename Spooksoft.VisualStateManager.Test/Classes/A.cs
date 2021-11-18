@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Spooksoft.VisualStateManager.Test.Classes
+{
+    public class A : BaseClass
+    {
+        private bool field1;
+        private bool field2;
+        private int field3;
+
+        private B b = new B();
+
+        public B B 
+        {
+            get => b;
+            set => Set(ref b, value);
+        }
+
+        public bool Prop1
+        {
+            get => field1;
+            set => Set(ref field1, value);
+        }
+
+        public bool Prop2
+        {
+            get => field2;
+            set => Set(ref field2, value);
+        }
+
+        public int Prop3
+        {
+            get => field3;
+            set => Set(ref field3, value);
+        }
+    }
+}

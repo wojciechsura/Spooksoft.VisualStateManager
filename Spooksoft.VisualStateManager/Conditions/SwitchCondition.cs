@@ -68,7 +68,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             }
         }
 
-        public SimpleCondition this[T value]
+        public BaseCondition this[T value]
         {
             get
             {

@@ -246,26 +246,31 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         private void UpdateValue()
         {
+            bool newValue;
+
             // Check if any of intermediate sources is not null
             if (chainNodes.All(n => n.SourceInChainIsValid()))
             {
-                var newValue = func(source);
-
-                if (newValue != cachedValue)
+                try
                 {
-                    cachedValue = newValue;
-                    OnValueChanged(cachedValue);
+                    newValue = func(source);
                 }
+                catch (NullReferenceException)
+                {
+                    newValue = defaultValue;
+                }                
             }
             else
             {
-                if (cachedValue != defaultValue)
-                {
-                    cachedValue = defaultValue;
-                    OnValueChanged(cachedValue);
-                }
+                newValue = defaultValue;
             }
-       }
+
+            if (cachedValue != newValue)
+            {
+                cachedValue = newValue;
+                OnValueChanged(cachedValue);
+            }
+        }
 
         // Public methods -----------------------------------------------------
 

@@ -172,6 +172,20 @@ namespace Spooksoft.VisualStateManager.Test
         }
 
         [TestMethod]
+        public void IndirectNullTest2()
+        {
+            // Arrange
+
+            A a = new A();
+
+            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => (x.B.Prop1 ? x.B.C : (C)null).Prop1, true);
+
+            // Assert
+
+            Assert.AreEqual(true, condition.GetValue());
+        }
+
+        [TestMethod]
         public void ReplaceTest1()
         {
             // Arrange

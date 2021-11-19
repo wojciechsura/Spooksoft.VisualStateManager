@@ -210,5 +210,20 @@ namespace Spooksoft.VisualStateManager.Test
             Assert.AreEqual(false, oldB.HavePropertyChangeHandlers());
             Assert.AreEqual(false, oldB.C.HavePropertyChangeHandlers());
         }
+
+        [TestMethod]
+        public void MethodCallTest1()
+        {
+            // Arrange
+
+            A a = new A();
+            a.B.List.Add(5);
+
+            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.List.Any(), false);
+
+            // Assert
+
+            Assert.AreEqual(true, condition.GetValue());
+        }
     }
 }

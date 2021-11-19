@@ -18,21 +18,21 @@ namespace Spooksoft.VisualStateManager.Conditions
         private class Visitor : BaseMemberAccessVisitor
         {
             private readonly ExpressionType[] availableExpressions = new[] { ExpressionType.Add, ExpressionType.AddChecked, ExpressionType.And,
-                ExpressionType.AndAlso, ExpressionType.ArrayLength, ExpressionType.ArrayIndex, ExpressionType.Constant, ExpressionType.Convert,
-                ExpressionType.Divide, ExpressionType.Equal, ExpressionType.ExclusiveOr, ExpressionType.GreaterThan, ExpressionType.GreaterThanOrEqual,
-                ExpressionType.Lambda, ExpressionType.LeftShift, ExpressionType.LessThan, ExpressionType.LessThanOrEqual, ExpressionType.MemberAccess, 
-                ExpressionType.Modulo, ExpressionType.Multiply, ExpressionType.MultiplyChecked, ExpressionType.Negate, ExpressionType.UnaryPlus, 
-                ExpressionType.NegateChecked, ExpressionType.Not, ExpressionType.NotEqual, ExpressionType.Or, ExpressionType.OrElse, 
-                ExpressionType.Parameter, ExpressionType.Power, ExpressionType.Quote, ExpressionType.RightShift, ExpressionType.Subtract, 
-                ExpressionType.SubtractChecked, ExpressionType.TypeIs, ExpressionType.TypeAs, ExpressionType.Default, ExpressionType.Unbox, 
-                ExpressionType.TypeEqual, ExpressionType.OnesComplement, ExpressionType.IsTrue, ExpressionType.IsFalse
+                ExpressionType.AndAlso, ExpressionType.ArrayLength, ExpressionType.ArrayIndex, ExpressionType.Call, ExpressionType.Constant, 
+                ExpressionType.Convert, ExpressionType.Divide, ExpressionType.Equal, ExpressionType.ExclusiveOr, ExpressionType.GreaterThan, 
+                ExpressionType.GreaterThanOrEqual, ExpressionType.Lambda, ExpressionType.LeftShift, ExpressionType.LessThan, ExpressionType.LessThanOrEqual, 
+                ExpressionType.MemberAccess, ExpressionType.Modulo, ExpressionType.Multiply, ExpressionType.MultiplyChecked, ExpressionType.Negate, 
+                ExpressionType.UnaryPlus, ExpressionType.NegateChecked, ExpressionType.Not, ExpressionType.NotEqual, ExpressionType.Or, 
+                ExpressionType.OrElse, ExpressionType.Parameter, ExpressionType.Power, ExpressionType.Quote, ExpressionType.RightShift, 
+                ExpressionType.Subtract, ExpressionType.SubtractChecked, ExpressionType.TypeIs, ExpressionType.TypeAs, ExpressionType.Default, 
+                ExpressionType.Unbox, ExpressionType.TypeEqual, ExpressionType.OnesComplement, ExpressionType.IsTrue, ExpressionType.IsFalse
             };
 
             private readonly List<Expression> expressions = new List<Expression>();
 
             public override Expression Visit(Expression node)
             {
-                if (!availableExpressions.Contains(node.NodeType))
+                if (node != null && !availableExpressions.Contains(node.NodeType))
                     throw new ArgumentException($"Expression contains unsupported operation: {node.NodeType}");
 
                 return base.Visit(node);

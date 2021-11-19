@@ -10,6 +10,7 @@ namespace Spooksoft.VisualStateManager.Test.Classes
     {
         private bool field1;
         private bool field2;
+        private List<int> list = new List<int>();
 
         private C c = new C();
 
@@ -30,5 +31,7 @@ namespace Spooksoft.VisualStateManager.Test.Classes
             get => field2;
             set => Set(ref field2, value);
         }
+
+        public List<int> List => list;
     }
 }

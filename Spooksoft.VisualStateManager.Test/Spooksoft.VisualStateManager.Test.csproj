@@ -50,6 +50,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChainedLambdaConditionTests.cs" />
     <Compile Include="Classes\A.cs" />
     <Compile Include="Classes\B.cs" />
     <Compile Include="Classes\BaseClass.cs" />

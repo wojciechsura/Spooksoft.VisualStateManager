@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Spooksoft.VisualStateManager.Test
 {
     [TestClass]
-    public class LambdaConditionTests
+    public class ChainedLambdaConditionTests
     {
         [TestMethod]
         public void SimpleTest1()
@@ -19,7 +19,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1, false);
+            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1, false);
 
             // Assert
 
@@ -33,7 +33,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, false);
+            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, false);
 
             // Assert
 
@@ -46,7 +46,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1, false);
+            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1, false);
             bool? notification = null;
             condition.ValueChanged += (s, e) => { notification = e.Value; };
 
@@ -66,7 +66,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, false);
+            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, false);
             bool? notification = null;
             condition.ValueChanged += (s, e) => { notification = e.Value; };
 
@@ -81,12 +81,32 @@ namespace Spooksoft.VisualStateManager.Test
         }
 
         [TestMethod]
+        public void UpdateValueTest3()
+        {
+            // Arrange
+
+            A a = new A();
+            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
+            bool? notification = null;
+            condition.ValueChanged += (s, e) => { notification = e.Value; };
+
+            // Act
+
+            a.B.C.Prop1 = true;
+
+            // Assert
+
+            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, notification);
+        }
+
+        [TestMethod]
         public void ExpressionTest1()
         {
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1 && x.Prop2, false);
+            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1 && x.Prop2, false);
             bool? notification = null;
             condition.ValueChanged += (s, e) => { notification = e.Value; };
 
@@ -102,33 +122,12 @@ namespace Spooksoft.VisualStateManager.Test
         }
 
         [TestMethod]
-        public void ExpressionTest2()
-        {
-            // Arrange
-
-            A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1 && x.B.Prop2, false);
-            bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
-
-            // Act
-
-            a.B.C.Prop1 = true;
-            a.B.Prop2 = true;
-
-            // Assert
-
-            Assert.AreEqual(true, condition.GetValue());
-            Assert.AreEqual(true, notification);
-        }
-
-        [TestMethod]
         public void ExpressionTest3()
         {
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop3 > 10, false);
+            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop3 > 10, false);
             bool? notification = null;
             condition.ValueChanged += (s, e) => { notification = e.Value; };
 
@@ -150,7 +149,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B = null;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, true);
+            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, true);
 
             // Assert
 
@@ -164,7 +163,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.C = null;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1 && x.B.C.Prop1, true);
+            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, true);
 
             // Assert
 
@@ -177,37 +176,14 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1, false);
+            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
             bool? notification = null;
             condition.ValueChanged += (s, e) => { notification = e.Value; };
 
             // Act
-            B b = new B();
-            b.C.Prop1 = true;
-            a.B = b;
-
-            // Assert
-
-            Assert.AreEqual(true, condition.GetValue());
-            Assert.AreEqual(true, notification);
-        }
-
-        [TestMethod]
-        public void ReplaceTest2()
-        {
-            // Arrange
-
-            A a = new A();
-            a.B.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1 && x.B.C.Prop1, false);
-            bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
-
-            // Act
-
-            C c = new C();
-            c.Prop1 = true;
-            a.B.C = c;
+            B b1 = new B();
+            b1.C.Prop1 = true;
+            a.B = b1;
 
             // Assert
 
@@ -223,7 +199,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             B oldB = a.B;
 
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1, false);
+            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
 
             // Act
 

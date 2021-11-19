@@ -47,10 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditions\BaseChainedLambdaCondition.cs" />
+    <Compile Include="Conditions\BaseLambdaCondition.cs" />
     <Compile Include="Commands\AppCommand.cs" />
     <Compile Include="Conditions\BaseCondition.cs" />
+    <Compile Include="Conditions\ChainedLambdaCondition.cs" />
+    <Compile Include="Conditions\LambdaConditions\IBaseChainedLambdaStep.cs" />
+    <Compile Include="Conditions\LambdaConditions\BaseMemberAccessVisitor.cs" />
     <Compile Include="Conditions\CompositeCondition.cs" />
     <Compile Include="Conditions\LambdaCondition.cs" />
+    <Compile Include="Conditions\LambdaConditions\NotificationRegistry.cs" />
+    <Compile Include="Conditions\LambdaConditions\MemberAccessChainNode.cs" />
     <Compile Include="Conditions\SimpleCondition.cs" />
     <Compile Include="Conditions\NegateCondition.cs" />
     <Compile Include="Conditions\PropertyWatchCondition.cs" />
@@ -61,5 +68,6 @@
   <ItemGroup>
     <None Include="Spooksoft.VisualStateManager.pfx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

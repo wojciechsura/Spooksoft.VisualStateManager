@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <version>1.0.7.4</version>
+    <version>1.0.7.5</version>
     <title>Spooksoft.VisualStateManager</title>
     <authors>Wojciech "Spook" Sura</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -15,5 +15,9 @@
     <dependencies>
       <group targetFramework=".NETFramework4.6.1" />
     </dependencies>
+	<readme>docs\README.md</readme>
   </metadata>
+  <files>
+	<file src="..\README.md" target="docs\" />
+  </files>
 </package>

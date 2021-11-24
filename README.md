@@ -155,26 +155,48 @@ myCommand2 = new AppCommand(() => SomeMethod(), myCondition.Conditions[2]);
 myCondition.Current = 2; // myCommand1 will be disabled and myCommand2 will be enabled
 ```
 
-## LambdaCondition
+## ChainedLambdaCondition
 
-The most powerful condition, which allows to specify a series of expressions, which can traverse a couple of classes and define a boolean expression at the end. For example:
+Powerful condition, which allows to specify a series of expressions, which can traverse a couple of classes and define a boolean expression at the end. For example:
 
 ```csharp
-myCondition = new LambdaCondition<MainViewModel, DocumentsManager, Document>(this, 
+myCondition = new ChainedLambdaCondition<MainViewModel, DocumentsManager, Document>(this, 
     mvm => mvm.DocumentsManager, 
     dm => dm.CurrentDocument, 
     cd => cd.Highlighting == Highlightings.Xml,
     false);
 ```
 
-`LambdaExpression` has the following requirements/restrictions:
+`ChainedLambdaCondition` has the following requirements/restrictions:
 
 * Only single-member accesses are allowed. So instead `x => x.A.B` write `x => x.A, a => a.B`.
 * Currently it supports only three-levels of nesting. If you need more, contact me, I'll add more (or look into sources how to do it yourself)
-* Classes on every level must implement `INotifyPropertyChanged` interface, so that `LambdaExpression` can listen to property value changes.
+* Classes on every level must implement `INotifyPropertyChanged` interface, so that `ChainedLambdaExpression` can listen to property value changes.
 
-The upsides of `LambdaExpression` are:
+The upsides of `ChainedLambdaCondition` are:
 
 * It automatically tracks all members on its way, including multiple member accesses (as long as they are single-level): `x => x.A + x.B > 5`
 * It allows you to clearly express logic behind the condition, what simplifies reading the source code a log.
 * It behaves properly if value on any level is null - in such case the default value is used.
+
+## LambdaCondition
+
+Another powerful condition, which allows you to define a single lambda, which defines, when condition is met and when not. Its usage is simpler than ChainedLambdaCondition, but it is also a little bit more restricted.
+
+```csharp
+myCondition = new LambdaCondition<MainViewModel>(this, mvm => mvm.DocumentsManager.CurrentDocument.Highlighting == Highlighting.Xml, false);
+```
+
+`LambdaCondition` differs from `ChainedLambdaCondition` in the following ways:
+
+* Multiple member accesses are allowed, you can write `x => x.A.B`
+* There is no restriction on nesting levels, if you really want / need, you can write eg. `x => A.B.C.D.E.F.G.H.I.J.K.L`
+* Since `LambdaCondition` actively checks for nulls on the way, there are some restrictions on operations, which you can perform. Namely, you cannot do `as` casts or call methods. You can however use most operators. If you need to create more complex condition, use `ChainedLambdaCondition` instead, which has less restrictions.
+* It is also required for every instance in the member access chain to implement `INotifyPropertyChanged` interface.
+
+The upsides of `LambdaCondition` are:
+
+* You can write complex conditions reaching various members (and sub-members) of your viewmodels
+* It automatically tracks all members on its way, including multiple member accesses: `x => x.A.B + x.C.D > 5`
+* It autonatically tracks nulls in the member access chains - in such case it falls back to the default value.
+* It allows you to define logic behind condition even better than `ChainedLambdaCondition`.

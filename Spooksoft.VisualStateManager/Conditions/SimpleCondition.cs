@@ -6,47 +6,18 @@ using System.Threading.Tasks;
 
 namespace Spooksoft.VisualStateManager.Conditions
 {
-    public class SimpleCondition : BaseCondition
+    public class SimpleCondition : BaseSimpleCondition
     {
-        // Private fields ----------------------------------------------------
-
-        private bool value;
-
-        // Private methods ---------------------------------------------------
-
-        private void SetValue(bool value)
+        public SimpleCondition(bool newValue = false) 
+            : base(newValue)
         {
-            if (value == this.value)
-                return;
 
-            this.value = value;
-            OnValueChanged(this.value);
         }
 
-        // Public methods ----------------------------------------------------
-
-        public SimpleCondition(bool newValue = false)
+        public new bool Value
         {
-            value = newValue;
-        }
-
-        public override bool GetValue()
-        {
-            return value;
-        }
-
-        // Public properties -------------------------------------------------
-
-        public bool Value
-        {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => base.Value;
+            set => SetValue(value);
         }
     }
 }

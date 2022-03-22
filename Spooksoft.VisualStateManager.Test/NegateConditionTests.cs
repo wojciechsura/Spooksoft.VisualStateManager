@@ -21,7 +21,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, negateCondition.GetValue());
+            Assert.AreEqual(true, negateCondition.Value);
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace Spooksoft.VisualStateManager.Test
             var simpleCondition = new SimpleCondition(false);
             var negateCondition = new NegateCondition(simpleCondition);
             bool? notification = null;
-            negateCondition.ValueChanged += (s, e) => { notification = e.Value; };
+            negateCondition.PropertyChanged += (s, e) => { notification = negateCondition.Value; };
 
             // Act
 
@@ -40,7 +40,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(false, negateCondition.GetValue());
+            Assert.AreEqual(false, negateCondition.Value);
         }
     }
 }

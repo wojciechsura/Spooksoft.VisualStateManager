@@ -2,21 +2,18 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <version>1.0.7.6</version>
+    <version>1.0.8.1</version>
     <title>Spooksoft.VisualStateManager</title>
     <authors>Wojciech "Spook" Sura</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/wojciechsura/Spooksoft.VisualStateManager</projectUrl>
     <description>A set of Command and Condition classes, which simplify command management in WPF applications</description>
-    <releaseNotes>Updated project to .net standard, added support for .net5 and .net6</releaseNotes>
+    <releaseNotes>BREAKING CHANGE: Values of conditions are now available through Value property and change is reported via standarized INotifyPropertyChanged pattern. This extends usage scenario for conditions in WPF. Fixed availability for .NET 5&amp;6.</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>WPF Windows-Presentation-Foundation Visual-State-Manager</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.6.1" />
-      <group targetFramework=".NETFramework4.8" />
-      <group targetFramework="net5.0" />
-      <group targetFramework="net6.0" />
     </dependencies>
 	<readme>docs\README.md</readme>
   </metadata>

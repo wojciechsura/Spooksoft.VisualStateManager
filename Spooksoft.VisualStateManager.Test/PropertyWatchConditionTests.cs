@@ -23,7 +23,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Spooksoft.VisualStateManager.Test
             a.Prop1 = true;
             var condition = new PropertyWatchCondition<A>(a, x => x.Prop1, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 

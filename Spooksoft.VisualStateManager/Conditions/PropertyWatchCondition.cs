@@ -31,7 +31,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             if (source != null)
                 source.PropertyChanged += HandleSourcePropertyChanged;
 
-            OnValueChanged(GetValue());
+            OnValueChanged();
         }
 
         private PropertyInfo GetPropertyInfo<TClass, TProperty>(Expression<Func<TClass, TProperty>> propertyLambda)
@@ -63,7 +63,7 @@ namespace Spooksoft.VisualStateManager.Conditions
         private void HandleSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals(valuePropertyName))
-                OnValueChanged(GetValue());
+                OnValueChanged();
         }
 
         public PropertyWatchCondition(TSource source, Expression<Func<TSource, bool>> expression, bool defaultValue)
@@ -86,7 +86,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         }
 
-        public override bool GetValue() => source != null ? getValueFunc(source) : defaultValue;
+        public override bool Value => source != null ? getValueFunc(source) : defaultValue;
 
         public TSource Source
         {

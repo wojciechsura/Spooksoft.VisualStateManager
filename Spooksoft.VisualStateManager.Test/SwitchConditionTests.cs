@@ -24,10 +24,10 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(false, switchCondition[1].GetValue());
-            Assert.AreEqual(true, switchCondition[2].GetValue());
-            Assert.AreEqual(false, switchCondition[3].GetValue());
-            Assert.AreEqual(false, switchCondition[4].GetValue());
+            Assert.AreEqual(false, switchCondition[1].Value);
+            Assert.AreEqual(true, switchCondition[2].Value);
+            Assert.AreEqual(false, switchCondition[3].Value);
+            Assert.AreEqual(false, switchCondition[4].Value);
         }
     }
 }

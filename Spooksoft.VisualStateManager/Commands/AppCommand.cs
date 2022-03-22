@@ -1,6 +1,7 @@
 ﻿using Spooksoft.VisualStateManager.Conditions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,10 @@ namespace Spooksoft.VisualStateManager.Commands
         private readonly BaseCondition condition;
         private readonly Action<object> action;
 
-        private void HandleConditionValueChanged(object sender, ValueChangedEventArgs e)
+        private void HandleConditionPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            if (e.PropertyName == nameof(BaseCondition.Value))
+                CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public AppCommand(Action<object> action, BaseCondition condition = null)
@@ -23,12 +25,12 @@ namespace Spooksoft.VisualStateManager.Commands
             this.action = action;
             this.condition = condition;
             if (condition != null)
-                condition.ValueChanged += HandleConditionValueChanged;
+                condition.PropertyChanged += HandleConditionPropertyChanged;
         }
 
         public bool CanExecute(object parameter)
         {
-            return condition?.GetValue() ?? true;
+            return condition?.Value ?? true;
         }
 
         public void Execute(object parameter)

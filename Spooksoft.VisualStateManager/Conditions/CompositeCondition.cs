@@ -17,9 +17,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Private methods -----------------------------------------------------
 
-        private void HandleValueChanged(object sender, ValueChangedEventArgs e)
+        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            ReevaluateValue();
+            if (e.PropertyName == nameof(BaseCondition.Value))
+                ReevaluateValue();
         }
 
         private bool InternalEvalValue()
@@ -36,7 +37,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
                             int i = 0;
                             while (i < conditions.Count && result)
-                                result &= conditions[i++].GetValue();
+                                result &= conditions[i++].Value;
 
                             return result;
                         }
@@ -46,7 +47,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
                             int i = 0;
                             while (i < conditions.Count && !result)
-                                result |= conditions[i++].GetValue();
+                                result |= conditions[i++].Value;
 
                             return result;
                         }
@@ -63,7 +64,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             if (newValue != value)
             {
                 value = newValue;
-                OnValueChanged(value);
+                OnValueChanged();
             }
         }
 
@@ -104,7 +105,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
             if (!conditions.Contains(condition))
             {
-                condition.ValueChanged += HandleValueChanged;
+                condition.PropertyChanged += HandlePropertyChanged;
                 conditions.Add(condition);
 
                 ReevaluateValue();
@@ -115,16 +116,13 @@ namespace Spooksoft.VisualStateManager.Conditions
         {
             if (conditions.Contains(condition))
             {
-                condition.ValueChanged -= HandleValueChanged;
+                condition.PropertyChanged -= HandlePropertyChanged;
                 conditions.Remove(condition);
 
                 ReevaluateValue();
             }
         }
 
-        public override bool GetValue()
-        {
-            return value;
-        }
+        public override bool Value => value;
     }
 }

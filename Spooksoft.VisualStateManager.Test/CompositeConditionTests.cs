@@ -23,7 +23,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(false, compositeCondition.GetValue());
+            Assert.AreEqual(false, compositeCondition.Value);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, compositeCondition.GetValue());
+            Assert.AreEqual(true, compositeCondition.Value);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, compositeCondition.GetValue());
+            Assert.AreEqual(true, compositeCondition.Value);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(false, compositeCondition.GetValue());
+            Assert.AreEqual(false, compositeCondition.Value);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace Spooksoft.VisualStateManager.Test
             bool? notification = null;
 
             var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
-            compositeCondition.ValueChanged += (s, e) => { notification = e.Value; };
+            compositeCondition.PropertyChanged += (s, e) => { notification = compositeCondition.Value; };
 
             // Act
 

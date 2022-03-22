@@ -54,7 +54,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             var simpleCondition = new SimpleCondition(false);
             bool? notification = null;
-            simpleCondition.ValueChanged += (s, e) => { notification = e.Value; };
+            simpleCondition.PropertyChanged += (s, e) => { notification = simpleCondition.Value; };
 
             // Act
 

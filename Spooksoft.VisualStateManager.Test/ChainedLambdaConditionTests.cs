@@ -23,7 +23,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 
@@ -56,7 +56,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -68,7 +68,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 
@@ -76,7 +76,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -88,7 +88,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 
@@ -96,7 +96,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -108,7 +108,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1 && x.Prop2, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 
@@ -117,7 +117,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -129,7 +129,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop3 > 10, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
 
@@ -137,7 +137,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -153,7 +153,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -167,7 +167,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
             bool? notification = null;
-            condition.ValueChanged += (s, e) => { notification = e.Value; };
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
             // Act
             B b1 = new B();
@@ -187,7 +187,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
             Assert.AreEqual(true, notification);
         }
 
@@ -223,7 +223,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             // Assert
 
-            Assert.AreEqual(true, condition.GetValue());
+            Assert.AreEqual(true, condition.Value);
         }
     }
 }

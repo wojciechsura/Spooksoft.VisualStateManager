@@ -3,7 +3,7 @@
     <TargetFramework>net48</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>D:\Dokumenty\Dev\VS\VisualStateManager\Spooksoft.VisualStateManager\Spooksoft.VisualStateManager.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Spooksoft.VisualStateManager\Spooksoft.VisualStateManager.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spooksoft.VisualStateManager\Spooksoft.VisualStateManager.csproj" />

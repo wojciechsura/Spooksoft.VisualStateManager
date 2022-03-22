@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Spooksoft.VisualStateManager.Conditions
 {
-    public delegate void ValueChangedHandler(object sender, ValueChangedEventArgs e);
-
-    public abstract class BaseCondition
+    public abstract class BaseCondition : INotifyPropertyChanged
     {
-        protected virtual void OnValueChanged(bool newValue) => ValueChanged?.Invoke(this, new ValueChangedEventArgs(newValue));
+        protected void OnValueChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
+        }
 
         public static BaseCondition operator &(BaseCondition first, BaseCondition second) =>
             new CompositeCondition(CompositeCondition.CompositionKind.And, first, second);
@@ -21,8 +23,11 @@ namespace Spooksoft.VisualStateManager.Conditions
         public static BaseCondition operator !(BaseCondition condition) =>
             new NegateCondition(condition);
 
-        public abstract bool GetValue();
+        public abstract bool Value
+        {
+            get;
+        }
 
-        public event ValueChangedHandler ValueChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

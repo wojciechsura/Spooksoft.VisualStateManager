@@ -75,7 +75,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             if (cachedValue != newValue)
             {
                 cachedValue = newValue;
-                OnValueChanged(newValue);
+                OnValueChanged();
             }
         }
 
@@ -171,9 +171,9 @@ namespace Spooksoft.VisualStateManager.Conditions
             this.source = null;
         }
 
-        public override bool GetValue()
+        public override bool Value
         {
-            return cachedValue;
+            get => cachedValue;
         }
     }
 }

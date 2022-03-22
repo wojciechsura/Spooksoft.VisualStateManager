@@ -10,9 +10,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <FileVersion>1.0.7.6</FileVersion>
-    <AssemblyVersion>1.0.7.6</AssemblyVersion>
-    <VersionPrefix>1.0.7.6</VersionPrefix>
+    <FileVersion>1.0.8.1</FileVersion>
+    <AssemblyVersion>1.0.8.1</AssemblyVersion>
+    <VersionPrefix>1.0.8.1</VersionPrefix>
     <AssemblyOriginatorKeyFile>Spooksoft.VisualStateManager.pfx</AssemblyOriginatorKeyFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>Converted project to .NET Standard to support .NET5 and .NET6</PackageReleaseNotes>

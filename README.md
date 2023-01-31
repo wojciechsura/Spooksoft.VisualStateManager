@@ -200,3 +200,17 @@ The upsides of `LambdaCondition` are:
 * It automatically tracks all members on its way, including multiple member accesses: `x => x.A.B + x.C.D > 5`
 * It autonatically tracks nulls in the member access chains - in such case it falls back to the default value.
 * It allows you to define logic behind condition even better than `ChainedLambdaCondition`.
+
+## AllCondition and AnyCondition
+
+You can use those two for `ObservableCollection`s. You can either use existing condition inside item class:
+
+```csharp
+var condition = new AllCondition(collection, item => item.SomeCondition);
+```
+
+Or you can create a condition on the fly if your class doesn't have conditions. In such case standard restrictions apply (most likely your item class will have to implement `INotifyPropertyChanged`):
+
+```csharp
+var condition = new AnyCondition(collection, item => new PropertyWatchCondition(item, x => x.SomeBoolProp));
+```

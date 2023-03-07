@@ -16,7 +16,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var condition = new TrueCondition();
+            var condition = Condition.True();
 
             // Assert
 
@@ -28,7 +28,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var condition = new FalseCondition();
+            var condition = Condition.False();
 
             // Assert
 

@@ -19,7 +19,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, true);
+            var condition = Condition.All(c, x => x.SimpleCondition, true);
 
             // Assert
 
@@ -45,7 +45,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.All(c, x => x.SimpleCondition, false);
             
             for (int i = 0; i < 10; i++)
             {
@@ -65,7 +65,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AnyCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.Any(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -85,7 +85,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.All(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -105,7 +105,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AnyCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.Any(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -125,7 +125,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.All(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -173,7 +173,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.All(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -223,7 +223,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             var c = new ObservableCollection<ConditionClass>();
-            var condition = new AllCondition<ConditionClass>(c, x => x.SimpleCondition, false);
+            var condition = Condition.All(c, x => x.SimpleCondition, false);
 
             for (int i = 0; i < 10; i++)
             {
@@ -281,11 +281,11 @@ namespace Spooksoft.VisualStateManager.Test
                     Prop1 = true
                 });
 
-            var condition = new AllCondition<C>(c, item => new PropertyWatchCondition<C>(item, x => x.Prop1, false));
+            var condition = Condition.All(c, item => Condition.PropertyWatch(item, x => x.Prop1, false));
 
             // Assert
 
-            Assert.AreEqual(condition.Value, true);
+            Assert.AreEqual(true, condition.Value);
         }
 
         [TestMethod]
@@ -302,11 +302,11 @@ namespace Spooksoft.VisualStateManager.Test
 
             c[0].Prop1 = true;
 
-            var condition = new AnyCondition<C>(c, item => new PropertyWatchCondition<C>(item, x => x.Prop1, false));
+            var condition = new AnyCondition<C>(c, item => Condition.PropertyWatch(item, x => x.Prop1, false));
 
             // Assert
 
-            Assert.AreEqual(condition.Value, true);
+            Assert.AreEqual(true, condition.Value);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 {
     public class SimpleCondition : BaseSimpleCondition
     {
+        [Obsolete("Please use Condition.Simple instead.")]
         public SimpleCondition(bool newValue = false) 
             : base(newValue)
         {

@@ -19,7 +19,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Prop1, false);
 
             // Assert
 
@@ -33,7 +33,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Prop1, false);
 
             // Assert
 
@@ -46,7 +46,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -66,7 +66,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -86,7 +86,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop1 && x.Prop2, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Prop1 && x.Prop2, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -107,7 +107,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1 && x.B.Prop2, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.C.Prop1 && x.B.Prop2, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -128,7 +128,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.Prop3 > 10, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Prop3 > 10, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -150,7 +150,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B = null;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1, true);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Prop1, true);
 
             // Assert
 
@@ -164,7 +164,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.C = null;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1 && x.B.C.Prop1, true);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Prop1 && x.B.C.Prop1, true);
 
             // Assert
 
@@ -177,7 +177,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.C.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -199,7 +199,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.Prop1 = true;
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.Prop1 && x.B.C.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Prop1 && x.B.C.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -223,7 +223,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             B oldB = a.B;
 
-            LambdaCondition<A> condition = new LambdaCondition<A>(a, x => x.B.C.Prop1, false);
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.C.Prop1, false);
 
             // Act
 

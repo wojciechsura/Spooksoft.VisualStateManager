@@ -12,6 +12,7 @@ namespace Spooksoft.VisualStateManager.Conditions
     public class ChainedLambdaCondition<TInput> : BaseChainedLambdaCondition<TInput>
         where TInput : class, INotifyPropertyChanged
     {
+        [Obsolete("Please use Condition.ChainedLambda instead.")]
         public ChainedLambdaCondition(TInput source, 
             Expression<Func<TInput, bool>> expression,
             bool defaultValue)
@@ -27,6 +28,7 @@ namespace Spooksoft.VisualStateManager.Conditions
     {
         private readonly IBaseChainedLambdaStep<TInput> firstStep;
 
+        [Obsolete("Please use Condition.ChainedLambda instead.")]
         public ChainedLambdaCondition(TInput source,
             Expression<Func<TInput, T1>> expression1,
             Expression<Func<T1, bool>> expression2,
@@ -45,6 +47,7 @@ namespace Spooksoft.VisualStateManager.Conditions
     {
         private readonly IBaseChainedLambdaStep<TInput> firstStep;
 
+        [Obsolete("Please use Condition.ChainedLambda instead.")]
         public ChainedLambdaCondition(TInput source,
             Expression<Func<TInput, T1>> expression1,
             Expression<Func<T1, T2>> expression2,
@@ -66,6 +69,7 @@ namespace Spooksoft.VisualStateManager.Conditions
     {
         private readonly IBaseChainedLambdaStep<TInput> firstStep;
 
+        [Obsolete("Please use Condition.ChainedLambda instead.")]
         public ChainedLambdaCondition(TInput source,
             Expression<Func<TInput, T1>> expression1,
             Expression<Func<T1, T2>> expression2,

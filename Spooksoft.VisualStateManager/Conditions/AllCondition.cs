@@ -25,7 +25,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             return newValue;
         }
 
-
+        [Obsolete("Please use Condition.All instead.")]
         public AllCondition(ObservableCollection<T> collection, Func<T, BaseCondition> conditionExtractor, bool valueIfEmpty = false)
             : base(collection, 
                   conditionExtractor, 

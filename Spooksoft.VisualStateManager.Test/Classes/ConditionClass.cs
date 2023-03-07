@@ -9,6 +9,6 @@ namespace Spooksoft.VisualStateManager.Test.Classes
 {
     public class ConditionClass
     {
-        public SimpleCondition SimpleCondition { get; } = new SimpleCondition();
+        public SimpleCondition SimpleCondition { get; } = Condition.Simple();
     }
 }

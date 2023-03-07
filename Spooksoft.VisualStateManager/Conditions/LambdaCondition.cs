@@ -88,6 +88,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods -----------------------------------------------------
 
+        [Obsolete("Please use Condition.Lambda instead.")]
         public LambdaCondition(TSource source, Expression<Func<TSource, bool>> lambda, bool defaultValue)
         {
             this.defaultValue = defaultValue;

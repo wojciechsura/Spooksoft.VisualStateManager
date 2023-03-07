@@ -16,7 +16,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var switchCondition = new SwitchCondition<int>(1, 2, 3, 4);
+            var switchCondition = Condition.Switch(1, 2, 3, 4);
 
             // Act
 

@@ -19,7 +19,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.Prop1 = true;
-            var condition = new PropertyWatchCondition<A>(a, x => x.Prop1, false);
+            var condition = Condition.PropertyWatch(a, x => x.Prop1, false);
 
             // Assert
 
@@ -33,7 +33,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.Prop1 = true;
-            var condition = new PropertyWatchCondition<A>(a, x => x.Prop1, false);
+            var condition = Condition.PropertyWatch(a, x => x.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 

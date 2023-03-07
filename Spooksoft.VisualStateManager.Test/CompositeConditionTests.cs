@@ -16,10 +16,10 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition1 = new SimpleCondition(false);
-            var simpleCondition2 = new SimpleCondition(true);
+            var simpleCondition1 = Condition.Simple(false);
+            var simpleCondition2 = Condition.Simple(true);
 
-            var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.And, simpleCondition1, simpleCondition2);
+            var compositeCondition = Condition.Composite(CompositeCondition.CompositionKind.And, simpleCondition1, simpleCondition2);
 
             // Assert
 
@@ -31,10 +31,10 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition1 = new SimpleCondition(false);
-            var simpleCondition2 = new SimpleCondition(false);
+            var simpleCondition1 = Condition.Simple(false);
+            var simpleCondition2 = Condition.Simple(false);
 
-            var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.And, simpleCondition1, simpleCondition2);
+            var compositeCondition = Condition.Composite(CompositeCondition.CompositionKind.And, simpleCondition1, simpleCondition2);
 
             // Act
 
@@ -51,10 +51,10 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition1 = new SimpleCondition(false);
-            var simpleCondition2 = new SimpleCondition(true);
+            var simpleCondition1 = Condition.Simple(false);
+            var simpleCondition2 = Condition.Simple(true);
 
-            var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
+            var compositeCondition = Condition.Composite(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
 
             // Assert
 
@@ -66,10 +66,10 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition1 = new SimpleCondition(false);
-            var simpleCondition2 = new SimpleCondition(true);
+            var simpleCondition1 = Condition.Simple(false);
+            var simpleCondition2 = Condition.Simple(true);
 
-            var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
+            var compositeCondition = Condition.Composite(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
 
             // Act
 
@@ -86,11 +86,11 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition1 = new SimpleCondition(false);
-            var simpleCondition2 = new SimpleCondition(true);
+            var simpleCondition1 = Condition.Simple(false);
+            var simpleCondition2 = Condition.Simple(true);
             bool? notification = null;
 
-            var compositeCondition = new CompositeCondition(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
+            var compositeCondition = Condition.Composite(CompositeCondition.CompositionKind.Or, simpleCondition1, simpleCondition2);
             compositeCondition.PropertyChanged += (s, e) => { notification = compositeCondition.Value; };
 
             // Act

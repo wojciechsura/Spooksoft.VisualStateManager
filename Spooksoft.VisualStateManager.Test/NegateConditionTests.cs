@@ -16,8 +16,8 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(false);
-            var negateCondition = new NegateCondition(simpleCondition);
+            var simpleCondition = Condition.Simple(false);
+            var negateCondition = Condition.Negate(simpleCondition);
 
             // Assert
 
@@ -29,8 +29,8 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(false);
-            var negateCondition = new NegateCondition(simpleCondition);
+            var simpleCondition = Condition.Simple(false);
+            var negateCondition = Condition.Negate(simpleCondition);
             bool? notification = null;
             negateCondition.PropertyChanged += (s, e) => { notification = negateCondition.Value; };
 

@@ -19,7 +19,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.Prop1 = true;
-            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1, false);
+            ChainedLambdaCondition<A> condition = Condition.ChainedLambda(a, x => x.Prop1, false);
 
             // Assert
 
@@ -33,7 +33,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.Prop1 = true;
-            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, false);
+            ChainedLambdaCondition<A, B> condition = Condition.ChainedLambda(a, x => x.B, b => b.Prop1, false);
 
             // Assert
 
@@ -46,7 +46,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1, false);
+            ChainedLambdaCondition<A> condition = Condition.ChainedLambda(a, x => x.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -66,7 +66,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, false);
+            ChainedLambdaCondition<A, B> condition = Condition.ChainedLambda(a, x => x.B, b => b.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -86,7 +86,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
+            ChainedLambdaCondition<A, B, C> condition = Condition.ChainedLambda(a, x => x.B, b => b.C, c => c.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -106,7 +106,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop1 && x.Prop2, false);
+            ChainedLambdaCondition<A> condition = Condition.ChainedLambda(a, x => x.Prop1 && x.Prop2, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -127,7 +127,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A> condition = new ChainedLambdaCondition<A>(a, x => x.Prop3 > 10, false);
+            ChainedLambdaCondition<A> condition = Condition.ChainedLambda(a, x => x.Prop3 > 10, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -149,7 +149,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B = null;
-            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.Prop1, true);
+            ChainedLambdaCondition<A, B> condition = Condition.ChainedLambda(a, x => x.B, b => b.Prop1, true);
 
             // Assert
 
@@ -163,7 +163,7 @@ namespace Spooksoft.VisualStateManager.Test
 
             A a = new A();
             a.B.C = null;
-            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, true);
+            ChainedLambdaCondition<A, B, C> condition = Condition.ChainedLambda(a, x => x.B, b => b.C, c => c.Prop1, true);
 
             // Assert
 
@@ -176,7 +176,7 @@ namespace Spooksoft.VisualStateManager.Test
             // Arrange
 
             A a = new A();
-            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
+            ChainedLambdaCondition<A, B, C> condition = Condition.ChainedLambda(a, x => x.B, b => b.C, c => c.Prop1, false);
             bool? notification = null;
             condition.PropertyChanged += (s, e) => { notification = condition.Value; };
 
@@ -199,7 +199,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             B oldB = a.B;
 
-            ChainedLambdaCondition<A, B, C> condition = new ChainedLambdaCondition<A, B, C>(a, x => x.B, b => b.C, c => c.Prop1, false);
+            ChainedLambdaCondition<A, B, C> condition = Condition.ChainedLambda(a, x => x.B, b => b.C, c => c.Prop1, false);
 
             // Act
 
@@ -219,7 +219,7 @@ namespace Spooksoft.VisualStateManager.Test
             A a = new A();
             a.B.List.Add(5);
 
-            ChainedLambdaCondition<A, B> condition = new ChainedLambdaCondition<A, B>(a, x => x.B, b => b.List.Any(), false);
+            ChainedLambdaCondition<A, B> condition = Condition.ChainedLambda(a, x => x.B, b => b.List.Any(), false);
 
             // Assert
 

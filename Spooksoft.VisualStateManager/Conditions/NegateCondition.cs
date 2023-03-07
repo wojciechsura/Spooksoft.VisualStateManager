@@ -23,6 +23,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods ----------------------------------------------------
 
+        [Obsolete("Please use Condition.Negate instead.")]
         public NegateCondition(BaseCondition newCondition)
         {
             condition = newCondition ?? throw new ArgumentNullException("newCondition");

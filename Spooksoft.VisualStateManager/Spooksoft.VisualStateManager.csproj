@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net48;net461;net472;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48;net472;net5.0;net6.0</TargetFrameworks>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -10,9 +10,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <FileVersion>1.1.0.0</FileVersion>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <VersionPrefix>1.1.0.0</VersionPrefix>
+    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <VersionPrefix>1.2.0.0</VersionPrefix>
     <AssemblyOriginatorKeyFile>Spooksoft.VisualStateManager.pfx</AssemblyOriginatorKeyFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>Added AllCondition and AnyCondition for ObservableCollections</PackageReleaseNotes>

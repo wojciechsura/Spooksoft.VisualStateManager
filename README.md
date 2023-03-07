@@ -60,7 +60,7 @@ public ICommand SaveDocumentCommand { get; }
 
 public MyWindow()
 {
-    documentSavedCondition = new SimpleCondition(false);
+    documentSavedCondition = Condition.Simple(false);
     SaveDocumentCommand = new AppCommand(obj => DoSaveDocument, !documentSavedCondition); // Note the !
 }
 
@@ -88,7 +88,7 @@ The `AppCommand` class provides a simple implementation of `ICommand` interface 
 The simplest condition wraps a `bool` into a class and notifies about changes. The usage is very simple.
 
 ```csharp
-myCondition = new SimpleCondition(false); // Initial value
+myCondition = Condition.Simple(false); // Initial value
 myCommand = new AppCommand(obj => SomeMethod(), myCondition);
 
 // ...
@@ -103,7 +103,7 @@ The `CompositeCondition` allows you to combine different conditions into one wit
 You may define it directly, like:
 
 ```csharp
-myCondition = new CompositeCondition(CompositionKind.And, myOtherCondition1, myOtherCondition2);
+myCondition = Condition.Composite(CompositionKind.And, myOtherCondition1, myOtherCondition2);
 myCommand = new AppCommand(obj => SomeMethod(), myCondition);
 ```
 
@@ -120,7 +120,7 @@ The latter is also a far easier to read.
 You can negate value of some condition. Similarly to `CompositeCondition` you may do it in two ways:
 
 ```csharp
-myCondition = new NegateCondition(myOtherCondition);
+myCondition = Condition.Negate(myOtherCondition);
 myCommand = new AppCommand(obj => SomeMethod(), myCondition);
 ```
 
@@ -137,7 +137,7 @@ This condition allows you to automatically track a property of some object, prov
 Usage:
 
 ```csharp
-myCondition = new PropertyWatchCondition<WatchedObject>(watchedObjectInstance, ob => ob.SomeProperty, false);
+myCondition = Condition.PropertyWatch<WatchedObject>(watchedObjectInstance, ob => ob.SomeProperty, false);
 ```
 
 The last parameter defines default value in case watched object instance was null.
@@ -147,7 +147,7 @@ The last parameter defines default value in case watched object instance was nul
 `SwitchCondition` behaves somewhat as a switch statement. It exposes a series of internal conditions, which are set basing on current value. Example should explain it better:
 
 ```csharp
-myCondition = new SwitchCondition<int>(1, 2, 3, 4);
+myCondition = Condition.Switch<int>(1, 2, 3, 4);
 
 myCommand1 = new AppCommand(() => SomeMethod(), myCondition.Conditions[1]);
 myCommand2 = new AppCommand(() => SomeMethod(), myCondition.Conditions[2]);
@@ -160,7 +160,7 @@ myCondition.Current = 2; // myCommand1 will be disabled and myCommand2 will be e
 Powerful condition, which allows to specify a series of expressions, which can traverse a couple of classes and define a boolean expression at the end. For example:
 
 ```csharp
-myCondition = new ChainedLambdaCondition<MainViewModel, DocumentsManager, Document>(this, 
+myCondition = Condition.ChainedLambda<MainViewModel, DocumentsManager, Document>(this, 
     mvm => mvm.DocumentsManager, 
     dm => dm.CurrentDocument, 
     cd => cd.Highlighting == Highlightings.Xml,
@@ -184,7 +184,7 @@ The upsides of `ChainedLambdaCondition` are:
 Another powerful condition, which allows you to define a single lambda, which defines, when condition is met and when not. Its usage is simpler than ChainedLambdaCondition, but it is also a little bit more restricted.
 
 ```csharp
-myCondition = new LambdaCondition<MainViewModel>(this, mvm => mvm.DocumentsManager.CurrentDocument.Highlighting == Highlighting.Xml, false);
+myCondition = Condition.Lambda<MainViewModel>(this, mvm => mvm.DocumentsManager.CurrentDocument.Highlighting == Highlighting.Xml, false);
 ```
 
 `LambdaCondition` differs from `ChainedLambdaCondition` in the following ways:
@@ -206,11 +206,11 @@ The upsides of `LambdaCondition` are:
 You can use those two for `ObservableCollection`s. You can either use existing condition inside item class:
 
 ```csharp
-var condition = new AllCondition(collection, item => item.SomeCondition);
+var condition = Condition.All(collection, item => item.SomeCondition);
 ```
 
 Or you can create a condition on the fly if your class doesn't have conditions. In such case standard restrictions apply (most likely your item class will have to implement `INotifyPropertyChanged`):
 
 ```csharp
-var condition = new AnyCondition(collection, item => new PropertyWatchCondition(item, x => x.SomeBoolProp));
+var condition = Condition.Any(collection, item => new PropertyWatchCondition(item, x => x.SomeBoolProp));
 ```

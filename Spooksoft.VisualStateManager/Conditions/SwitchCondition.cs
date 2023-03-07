@@ -12,12 +12,14 @@ namespace Spooksoft.VisualStateManager.Conditions
         private T current;
         private readonly Dictionary<T, SimpleCondition> conditions;
 
+        [Obsolete("Please use Condition.Switch instead.")]
         public SwitchCondition()
         {
             conditions = new Dictionary<T, SimpleCondition>();
             current = default;
         }
 
+        [Obsolete("Please use Condition.Switch instead.")]
         public SwitchCondition(params T[] newValues)
         {
             conditions = new Dictionary<T, SimpleCondition>();

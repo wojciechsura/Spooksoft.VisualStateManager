@@ -78,6 +78,7 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods ------------------------------------------------------
 
+        [Obsolete("Please use Condition.Composite instead.")]
         public CompositeCondition(CompositionKind kind = CompositionKind.And)
         {
             compositionKind = kind;
@@ -85,6 +86,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             value = false;
         }
 
+        [Obsolete("Please use Condition.Composite instead.")]
         public CompositeCondition(CompositionKind kind,
             params BaseCondition[] compositeConditions)
         {

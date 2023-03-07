@@ -12,7 +12,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(false);
+            var simpleCondition = Condition.Simple(false);
 
             // Assert
 
@@ -24,7 +24,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(true);
+            var simpleCondition = Condition.Simple(true);
 
             // Assert
 
@@ -36,7 +36,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(false);
+            var simpleCondition = Condition.Simple(false);
 
             // Act
 
@@ -52,7 +52,7 @@ namespace Spooksoft.VisualStateManager.Test
         {
             // Arrange
 
-            var simpleCondition = new SimpleCondition(false);
+            var simpleCondition = Condition.Simple(false);
             bool? notification = null;
             simpleCondition.PropertyChanged += (s, e) => { notification = simpleCondition.Value; };
 

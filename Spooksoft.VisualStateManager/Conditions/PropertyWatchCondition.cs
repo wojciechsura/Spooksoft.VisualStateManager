@@ -66,6 +66,7 @@ namespace Spooksoft.VisualStateManager.Conditions
                 OnValueChanged();
         }
 
+        [Obsolete("Please use Condition.PropertyWatch instead.")]
         public PropertyWatchCondition(TSource source, Expression<Func<TSource, bool>> expression, bool defaultValue)
         {
             this.source = source;
@@ -80,6 +81,7 @@ namespace Spooksoft.VisualStateManager.Conditions
             getValueFunc = expression.Compile();
         }
 
+        [Obsolete("Please use Condition.PropertyWatch instead.")]
         public PropertyWatchCondition(Expression<Func<TSource, bool>> expression, bool defaultValue)
             : this(null, expression, defaultValue)
         {

@@ -3,6 +3,7 @@ using Spooksoft.VisualStateManager.Conditions;
 using Spooksoft.VisualStateManager.Test.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -233,6 +234,195 @@ namespace Spooksoft.VisualStateManager.Test
 
             Assert.AreEqual(false, oldB.HavePropertyChangeHandlers());
             Assert.AreEqual(false, oldB.C.HavePropertyChangeHandlers());
+        }
+
+        // Collection change tests -------------------------------------------
+
+        [TestMethod]
+        public void CollectionCountAddTest()
+        {
+            // Arrange
+
+            A a = new A();
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Items.Count > 0, false);
+
+            // Act & Assert
+
+            Assert.AreEqual(false, condition.Value);
+
+            a.Items.Add("item");
+
+            Assert.AreEqual(true, condition.Value);
+        }
+
+        [TestMethod]
+        public void CollectionCountRemoveTest()
+        {
+            // Arrange
+
+            A a = new A();
+            a.Items.Add("item");
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Items.Count > 0, false);
+
+            // Act & Assert
+
+            Assert.AreEqual(true, condition.Value);
+
+            a.Items.Clear();
+
+            Assert.AreEqual(false, condition.Value);
+        }
+
+        [TestMethod]
+        public void CollectionCountNotificationTest()
+        {
+            // Arrange
+
+            A a = new A();
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Items.Count > 0, false);
+            bool? notification = null;
+            condition.PropertyChanged += (s, e) => { notification = condition.Value; };
+
+            // Act
+
+            a.Items.Add("item");
+
+            // Assert
+
+            Assert.AreEqual(true, condition.Value);
+            Assert.AreEqual(true, notification);
+        }
+
+        [TestMethod]
+        public void CollectionCountThresholdTest()
+        {
+            // Arrange
+
+            A a = new A();
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Items.Count > 2, false);
+
+            // Act & Assert
+
+            a.Items.Add("1");
+            Assert.AreEqual(false, condition.Value);
+
+            a.Items.Add("2");
+            Assert.AreEqual(false, condition.Value);
+
+            a.Items.Add("3");
+            Assert.AreEqual(true, condition.Value);
+
+            a.Items.RemoveAt(0);
+            Assert.AreEqual(false, condition.Value);
+        }
+
+        [TestMethod]
+        public void NestedCollectionCountTest()
+        {
+            // Arrange
+
+            A a = new A();
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Items.Count > 0, false);
+
+            // Act & Assert
+
+            Assert.AreEqual(false, condition.Value);
+
+            a.B.Items.Add("item");
+
+            Assert.AreEqual(true, condition.Value);
+        }
+
+        [TestMethod]
+        public void CollectionReplacementTest()
+        {
+            // Arrange
+
+            A a = new A();
+            a.Items.Add("item1");
+            var oldItems = a.Items;
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.Items.Count > 0, false);
+
+            Assert.AreEqual(true, condition.Value);
+
+            // Act - replace collection with a new empty one
+
+            a.Items = new ObservableCollection<string>();
+
+            // Assert - condition should now be false (new collection is empty)
+
+            Assert.AreEqual(false, condition.Value);
+
+            // Adding to old collection should NOT update the condition
+            oldItems.Add("item2");
+            Assert.AreEqual(false, condition.Value);
+
+            // Adding to new collection SHOULD update the condition
+            a.Items.Add("item3");
+            Assert.AreEqual(true, condition.Value);
+        }
+
+        [TestMethod]
+        public void CollectionNullIntermediateTest()
+        {
+            // Arrange
+
+            A a = new A();
+            a.B = null;
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Items.Count > 0, true);
+
+            // Assert - defaultValue used because B is null
+
+            Assert.AreEqual(true, condition.Value);
+        }
+
+        [TestMethod]
+        public void CollectionNullIntermediateRecoveryTest()
+        {
+            // Arrange
+
+            A a = new A();
+            a.B = null;
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Items.Count > 0, true);
+
+            Assert.AreEqual(true, condition.Value);
+
+            // Act - assign B, then add items
+
+            a.B = new B();
+            Assert.AreEqual(false, condition.Value);
+
+            a.B.Items.Add("item");
+            Assert.AreEqual(true, condition.Value);
+        }
+
+        [TestMethod]
+        public void NestedCollectionReplacementViaIntermediateTest()
+        {
+            // Arrange
+
+            A a = new A();
+            a.B.Items.Add("item");
+            var oldB = a.B;
+            LambdaCondition<A> condition = Condition.Lambda(a, x => x.B.Items.Count > 0, false);
+
+            Assert.AreEqual(true, condition.Value);
+
+            // Act - replace B (new B has empty Items)
+
+            a.B = new B();
+
+            // Assert
+
+            Assert.AreEqual(false, condition.Value);
+
+            // Old B's collection changes should NOT trigger updates
+            oldB.Items.Add("another");
+            Assert.AreEqual(false, condition.Value);
+
+            // New B's collection changes should trigger updates
+            a.B.Items.Add("new item");
+            Assert.AreEqual(true, condition.Value);
         }
     }
 }

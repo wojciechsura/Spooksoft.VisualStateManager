@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,18 @@ namespace Spooksoft.VisualStateManager.Test.Classes
         private int field3;
 
         private B b = new B();
+        private ObservableCollection<string> items = new ObservableCollection<string>();
 
         public B B 
         {
             get => b;
             set => Set(ref b, value);
+        }
+
+        public ObservableCollection<string> Items
+        {
+            get => items;
+            set => Set(ref items, value);
         }
 
         public bool Prop1

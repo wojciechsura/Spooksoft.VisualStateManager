@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace Spooksoft.VisualStateManager.Conditions
 {
+    /// <summary>
+    /// A condition that evaluates a lambda expression against a fixed source object.
+    /// Supports chained member access (e.g. a.B.C.Prop) and automatically monitors
+    /// property and collection changes on all intermediate objects in the chain.
+    /// </summary>
     public class LambdaCondition<TSource> : BaseLambdaCondition
         where TSource : class, INotifyPropertyChanged
     {
@@ -64,11 +69,18 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Private methods ----------------------------------------------------
 
+        /// <summary>
+        /// Handles the ValueChanged event from the notification registry.
+        /// </summary>
         private void HandleIntermediateValueChanged(object sender, EventArgs e)
         {
             UpdateValue();
         }
 
+        /// <summary>
+        /// Re-evaluates the lambda expression and updates the cached condition value.
+        /// Falls back to the default value when any intermediate source in the chain is null.
+        /// </summary>
         private void UpdateValue()
         {
             bool newValue;
@@ -88,6 +100,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods -----------------------------------------------------
 
+        /// <summary>
+        /// Creates a new LambdaCondition that evaluates the given lambda against the source object
+        /// and automatically subscribes to property and collection changes along the member access chain.
+        /// </summary>
         [Obsolete("Please use Condition.Lambda instead.")]
         public LambdaCondition(TSource source, Expression<Func<TSource, bool>> lambda, bool defaultValue)
         {

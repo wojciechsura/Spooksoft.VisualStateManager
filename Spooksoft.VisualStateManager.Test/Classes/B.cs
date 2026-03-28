@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Spooksoft.VisualStateManager.Test.Classes
         private bool field1;
         private bool field2;
         private List<int> list = new List<int>();
+        private ObservableCollection<string> items = new ObservableCollection<string>();
 
         private C c = new C();
 
@@ -30,6 +32,12 @@ namespace Spooksoft.VisualStateManager.Test.Classes
         {
             get => field2;
             set => Set(ref field2, value);
+        }
+
+        public ObservableCollection<string> Items
+        {
+            get => items;
+            set => Set(ref items, value);
         }
 
         public List<int> List => list;

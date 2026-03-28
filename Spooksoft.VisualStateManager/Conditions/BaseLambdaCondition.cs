@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Spooksoft.VisualStateManager.Conditions
 {
+    /// <summary>
+    /// Abstract base class for lambda-based conditions. Provides the core logic
+    /// for parsing lambda expressions into chains of member-access nodes.
+    /// </summary>
     public abstract class BaseLambdaCondition : BaseCondition
     {
         // Protected methods --------------------------------------------------

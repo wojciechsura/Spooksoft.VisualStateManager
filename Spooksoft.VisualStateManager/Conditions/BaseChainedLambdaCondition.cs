@@ -10,6 +10,12 @@ using System.Threading.Tasks;
 namespace Spooksoft.VisualStateManager.Conditions
 {
 
+    /// <summary>
+    /// Abstract base class for chained lambda conditions. Evaluates a boolean lambda
+    /// against the final source in a chain of steps, where each step maps one
+    /// INotifyPropertyChanged object to another. Only single-level member access
+    /// is allowed within each step (use LambdaCondition for chained member access).
+    /// </summary>
     public abstract class BaseChainedLambdaCondition<TFinalSource> : BaseLambdaCondition, IBaseChainedLambdaStep<TFinalSource>
         where TFinalSource : class, INotifyPropertyChanged
     {
@@ -69,6 +75,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Private methods ----------------------------------------------------
 
+        /// <summary>
+        /// Re-evaluates the lambda expression against the current source
+        /// and updates the cached condition value.
+        /// </summary>
         private void Update()
         {
             bool newValue = source != null ? func(source) : defaultValue;
@@ -79,6 +89,9 @@ namespace Spooksoft.VisualStateManager.Conditions
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event from the notification registry.
+        /// </summary>
         private void HandleValueChanged(object sender, EventArgs e)
         {
             Update();
@@ -86,6 +99,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // IBaseChainedLambdaStep<TFinalSource> implementation ----------------
 
+        /// <summary>
+        /// Updates the source for the final step in the chain and refreshes
+        /// property/collection tracking on all member-access nodes.
+        /// </summary>
         void IBaseChainedLambdaStep<TFinalSource>.UpdateSource(TFinalSource newSource, bool force)
         {
             if (source == newSource && !force)
@@ -101,6 +118,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Protected types ----------------------------------------------------
 
+        /// <summary>
+        /// An intermediate step in a chained lambda condition. Maps a source of type
+        /// TInput to an output of type TOutput and forwards the result to the next step.
+        /// </summary>
         internal class ChainStep<TInput, TOutput> : IBaseChainedLambdaStep<TInput>
             where TInput : class, INotifyPropertyChanged
             where TOutput : class, INotifyPropertyChanged
@@ -111,7 +132,10 @@ namespace Spooksoft.VisualStateManager.Conditions
             private readonly IBaseChainedLambdaStep<TOutput> nextStep;
             private readonly NotificationRegistry notificationRegistry;
             private TInput source;
-            
+
+            /// <summary>
+            /// Evaluates the step's lambda and forwards the result to the next step.
+            /// </summary>
             private void Update(bool force)
             {
                 if (source != null)
@@ -125,11 +149,18 @@ namespace Spooksoft.VisualStateManager.Conditions
                 }
             }
 
+            /// <summary>
+            /// Handles the ValueChanged event from the notification registry.
+            /// </summary>
             private void HandleValueChanged(object sender, EventArgs e)
             {
                 Update(false);
             }
 
+            /// <summary>
+            /// Creates a new chain step that evaluates the given lambda and forwards
+            /// the result to the next step in the chain.
+            /// </summary>
             internal ChainStep(Expression<Func<TInput, TOutput>> lambda, 
                 IBaseChainedLambdaStep<TOutput> nextStep)
             {
@@ -142,6 +173,10 @@ namespace Spooksoft.VisualStateManager.Conditions
                 this.nextStep = nextStep;
             }
 
+            /// <summary>
+            /// Updates the source for this step and refreshes property/collection
+            /// tracking on all member-access nodes.
+            /// </summary>
             void IBaseChainedLambdaStep<TInput>.UpdateSource(TInput newSource, bool force)
             {
                 if (source == newSource && !force)
@@ -158,6 +193,10 @@ namespace Spooksoft.VisualStateManager.Conditions
 
         // Public methods -----------------------------------------------------
 
+        /// <summary>
+        /// Initializes the final step of a chained lambda condition with the given
+        /// boolean expression and default value.
+        /// </summary>
         public BaseChainedLambdaCondition(Expression<Func<TFinalSource, bool>> expression,
             bool defaultValue = false)
         {

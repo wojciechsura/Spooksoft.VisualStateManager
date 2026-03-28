@@ -1,0 +1,261 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-03-28T07:00:55.2671063Z",
+  "analysisEndTime": "2026-03-28T07:00:56.6339816Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 3,
+      "incidents": 5,
+      "effort": 5
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 3,
+        "Optional": 0,
+        "Potential": 2,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 1,
+        "Project": 2,
+        "Api": 2
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 4,
+      "properties": {
+        "appName": "Spooksoft.VisualStateManager",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "netstandard2.0",
+          "net48",
+          "net472",
+          "net8.0",
+          "net10.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 25,
+        "numberOfCodeFiles": 25,
+        "linesTotal": 1575,
+        "linesOfCode": 1575,
+        "totalApiScanned": 1023,
+        "minLinesOfCodeToChange": 2,
+        "maxLinesOfCodeToChange": 2
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "bdb997f7-b35e-4775-9333-20d9fa7e2124",
+          "ruleId": "NuGet.0003",
+          "projectPath": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Data.DataSetExtensions, 4.5.0\n\nRekomendacja:\n\nFunkcjonalno\u015B\u0107 pakietu do\u0142\u0105czona do nowego odwo\u0142ania platformy",
+              "protected": "System.Data.DataSetExtensions, 4.5.0\n\nRekomendacja:\n\nFunkcjonalno\u015B\u0107 pakietu do\u0142\u0105czona do nowego odwo\u0142ania platformy"
+            },
+            "kind": "File",
+            "path": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+            "snippet": "System.Data.DataSetExtensions, 4.5.0\n\nRekomendacja:\n\nFunkcjonalno\u015B\u0107 pakietu do\u0142\u0105czona do nowego odwo\u0142ania platformy",
+            "protectedSnippet": "System.Data.DataSetExtensions, 4.5.0\n\nRekomendacja:\n\nFunkcjonalno\u015B\u0107 pakietu do\u0142\u0105czona do nowego odwo\u0142ania platformy",
+            "label": "System.Data.DataSetExtensions 4.5.0",
+            "properties": {
+              "PackageId": "System.Data.DataSetExtensions",
+              "PackageVersion": "4.5.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "0f5a8c70-4931-4710-a8dd-f426b92aac02",
+          "ruleId": "Project.0002",
+          "projectPath": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Bie\u017C\u0105ca struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0\nZalecana struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0;net10.0",
+              "protected": "Bie\u017C\u0105ca struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0\nZalecana struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0;net10.0"
+            },
+            "kind": "File",
+            "path": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+            "snippet": "Bie\u017C\u0105ca struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0\nZalecana struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0;net10.0",
+            "protectedSnippet": "Bie\u017C\u0105ca struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0\nZalecana struktura docelowa: netstandard2.0;net48;net472;net8.0;net10.0;net10.0",
+            "properties": {
+              "CurrentTargetFramework": "netstandard2.0;net48;net472;net8.0;net10.0",
+              "RecommendedTargetFramework": "netstandard2.0;net48;net472;net8.0;net10.0;net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "7fa98fc0-b7a6-4434-a457-3c42ac2af882",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Default \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw for types marked with \u0060InlineArrayAttribute\u0060 ",
+          "projectPath": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "pair.Value.Value = pair.Key.Equals(value);",
+              "protected": "M:System.ValueType.Equals(System.Object)"
+            },
+            "kind": "File",
+            "path": "Spooksoft.VisualStateManager\\Conditions\\SwitchCondition.cs",
+            "snippet": "pair.Value.Value = pair.Key.Equals(value);",
+            "protectedSnippet": "M:System.ValueType.Equals(System.Object)",
+            "label": "M:System.ValueType.Equals(System.Object)",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/inlinearrayattribute.md",
+                "isCustom": false
+              }
+            ],
+            "line": 67,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "cb6f36cd-7180-4a22-bbdb-d2f4abe3e7e0",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Default \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw for types marked with \u0060InlineArrayAttribute\u0060 ",
+          "projectPath": "Spooksoft.VisualStateManager\\Spooksoft.VisualStateManager.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var condition = new SimpleCondition(current.Equals(value));",
+              "protected": "M:System.ValueType.Equals(System.Object)"
+            },
+            "kind": "File",
+            "path": "Spooksoft.VisualStateManager\\Conditions\\SwitchCondition.cs",
+            "snippet": "var condition = new SimpleCondition(current.Equals(value));",
+            "protectedSnippet": "M:System.ValueType.Equals(System.Object)",
+            "label": "M:System.ValueType.Equals(System.Object)",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/inlinearrayattribute.md",
+                "isCustom": false
+              }
+            ],
+            "line": 36,
+            "column": 12
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Spooksoft.VisualStateManager.Test\\Spooksoft.VisualStateManager.Test.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Spooksoft.VisualStateManager.Test",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net48"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 15,
+        "numberOfCodeFiles": 15,
+        "linesTotal": 1321,
+        "linesOfCode": 1321,
+        "totalApiScanned": 783,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "b46de03c-7c3f-4147-a09a-0d8b3342cca4",
+          "ruleId": "Project.0002",
+          "projectPath": "Spooksoft.VisualStateManager.Test\\Spooksoft.VisualStateManager.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Bie\u017C\u0105ca struktura docelowa: net48\nZalecana struktura docelowa: net10.0",
+              "protected": "Bie\u017C\u0105ca struktura docelowa: net48\nZalecana struktura docelowa: net10.0"
+            },
+            "kind": "File",
+            "path": "Spooksoft.VisualStateManager.Test\\Spooksoft.VisualStateManager.Test.csproj",
+            "snippet": "Bie\u017C\u0105ca struktura docelowa: net48\nZalecana struktura docelowa: net10.0",
+            "protectedSnippet": "Bie\u017C\u0105ca struktura docelowa: net48\nZalecana struktura docelowa: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net48",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "isFeature": false,
+      "description": "Funkcja pakietu NuGet jest do\u0142\u0105czona do dokumentacji struktury.\n\nNale\u017Cy usun\u0105\u0107 pakiet.",
+      "label": "Funkcja pakietu NuGet jest do\u0142\u0105czona do dokumentacji struktury",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "Interfejs API wykazuje zmian\u0119 zachowania w wybranej wersji platformy .NET: kod i pliki binarne mog\u0105 zachowywa\u0107 si\u0119 inaczej w czasie wykonywania bez konieczno\u015Bci ponownej kompilacji, ale nowe zachowanie mo\u017Ce by\u0107 niepo\u017C\u0105dane i wymaga\u0107 aktualizacji.",
+      "label": "Zmiana zachowania w wybranej wersji platformy .NET",
+      "severity": "Potential",
+      "effort": 1
+    }
+  }
+}

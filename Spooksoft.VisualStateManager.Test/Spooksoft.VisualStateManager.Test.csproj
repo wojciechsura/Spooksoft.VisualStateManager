@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Spooksoft.VisualStateManager\Spooksoft.VisualStateManager.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spooksoft.VisualStateManager\Spooksoft.VisualStateManager.csproj" />
